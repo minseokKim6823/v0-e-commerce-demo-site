@@ -1,25 +1,12 @@
-"use client"
-
 import Image from "next/image"
 import Link from "next/link"
 import { type Product, formatPrice } from "@/lib/products"
-import { useCart } from "@/hooks/use-cart"
-import { Button } from "@/components/ui/button"
-import { ShoppingBag } from "lucide-react"
 
 interface ProductCardProps {
   product: Product
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const { addItem } = useCart()
-
-  const handleQuickAdd = (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    addItem(product, product.colors?.[0], product.sizes?.[0])
-  }
-
   return (
     <Link href={`/product/${product.id}`} className="group">
       <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-muted">
@@ -40,16 +27,6 @@ export function ProductCard({ product }: ProductCardProps) {
             BEST
           </span>
         )}
-        <div className="absolute inset-x-0 bottom-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity">
-          <Button
-            onClick={handleQuickAdd}
-            className="w-full"
-            size="sm"
-          >
-            <ShoppingBag className="h-4 w-4 mr-2" />
-            장바구니 담기
-          </Button>
-        </div>
       </div>
       <div className="mt-4 space-y-1">
         <h3 className="text-sm font-medium text-balance">{product.name}</h3>
