@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -8,8 +8,9 @@ import { CartDrawer } from "@/components/cart-drawer"
 import { ProductCard } from "@/components/product-card"
 import { products, categories } from "@/lib/products"
 import { Button } from "@/components/ui/button"
+import { Spinner } from "@/components/ui/spinner"
 
-export default function ProductsPage() {
+function ProductsContent() {
   const searchParams = useSearchParams()
   const categoryParam = searchParams.get("category")
   
@@ -82,5 +83,29 @@ export default function ProductsPage() {
       <Footer />
       <CartDrawer />
     </>
+  )
+}
+
+function ProductsLoading() {
+  return (
+    <>
+      <Header />
+      <main className="min-h-screen">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+          <div className="flex items-center justify-center py-20">
+            <Spinner className="size-8" />
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </>
+  )
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<ProductsLoading />}>
+      <ProductsContent />
+    </Suspense>
   )
 }
