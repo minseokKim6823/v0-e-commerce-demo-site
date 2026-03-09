@@ -123,7 +123,7 @@ export default function AboutPage() {
             <p className="text-background/70 mb-8">
               MODO의 새로운 시즌 컬렉션을 만나보세요.
             </p>
-            <Button asChild size="lg" variant="outline" className="border-background text-background hover:bg-background hover:text-foreground">
+            <Button asChild size="lg" variant="outline" className="border-background text-background">
               <Link href="/products">
                 쇼핑하기
                 <ArrowRight className="ml-2 h-4 w-4" />
